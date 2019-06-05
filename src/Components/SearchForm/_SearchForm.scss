@@ -1,0 +1,85 @@
+$default-font-size: 1.6rem;
+
+// airbnb style box shadow:
+//     box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+
+
+.form__row{
+    display: inline-block;
+    position: relative;
+    top: 12.5rem;
+    left: 10rem;
+}
+
+.form{
+    background-color: white;
+    border-radius: 3px;
+    // font-family: inherit;
+    // font-size: $default-font-size;
+    height: 52rem;
+    width: 44.1rem;
+    box-shadow: 0.2rem 0.2rem 4rem 0px rgba(0,0,0,0.75);
+    
+
+    &__container{
+        padding: 3rem;
+        height: 100%;
+        width: 100%;
+        display: inline-block;
+    }
+
+    &__group{
+        margin-bottom: 3px;
+        border-radius: 3px;
+        
+        &--btn{
+            text-align: right;
+        }
+
+        &--search-btn{
+            font-size: 1.7rem;
+            font-weight: 800;
+            // padding: 0.6rem 1.2rem;
+            margin-bottom: 0;
+
+            display: inline-block;
+            color: #fff;
+            cursor: pointer;
+            background-color: #007bff;
+            border-radius: 0.4rem;
+            border-width: 0.2rem;
+            line-height: 2.4rem;
+            padding: 1rem 2.2rem;
+        }
+    }
+
+    &__header{
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color:#474747;
+    }
+    
+    &__label{
+        display: block;
+        color: #474747;
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    &__input{
+        font-size: $default-font-size;
+        width: 100%;
+        padding: 1rem;
+        margin: 1.2rem 0;
+
+        &-date{
+            font-size: $default-font-size;
+            width: 40%;
+            padding: 1rem;
+            margin: 1.2rem 0;
+        }
+    }
+}
+
+
