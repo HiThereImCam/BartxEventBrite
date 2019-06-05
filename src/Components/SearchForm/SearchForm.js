@@ -1,4 +1,4 @@
-import React, { Component } from './node_modules/react';
+import React, { Component } from 'react';
 import "./_SearchForm.scss";
 const bartKey = process.env.REACT_API_BART_API_KEY;
 
@@ -25,7 +25,7 @@ class SearchForm extends Component {
     async getAllStations(){
         try{
             const response = await(`http:api.bart.gov/api/etd.aspx?cmd=etd&orig=${this.state.selectedStation}&key=${bartKey}&json=y`);
-            const data = await response.json();
+            const data = response.json();
             console.log(`Here: ${data}`);
 
 
