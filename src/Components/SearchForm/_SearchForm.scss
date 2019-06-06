@@ -79,6 +79,12 @@ $default-font-size: 1.6rem;
             padding: 1rem;
             margin: 1.2rem 0;
         }
+        &-time{
+            font-size: $default-font-size;
+            width: 40%;
+            padding: 1rem;
+            margin: 1.2rem 0;
+        }
     }
 }
 
