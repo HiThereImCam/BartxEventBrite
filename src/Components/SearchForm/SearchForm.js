@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./_SearchForm.scss";
-const bartKey = process.env.REACT_APP_BART_API_KEY;
 
 
 
@@ -25,14 +24,23 @@ class SearchForm extends Component {
 
     async getAllStations(){
         try{
-            const response = await fetch(`http://api.bart.gov/api/etd.aspx?cmd=etd&orig=${this.state.selectedStation}&key=${bartKey}&json=y`);
+            const response = await fetch(``);
             // console.log(response.json());
-            const data = await response.json();
-            // const apiData = data.data.root;
-            // console.log(`Here: ${apiData}`);
-            this.setState({
-                allStations: data.root.station
-            })
+            // const data = await response.json();
+            // this.setState({
+            //     allStations: data.root.station
+            // })
+
+
+            /**
+             * Goal: 
+             * The data is going to get passed from the backend
+             * 1.) Get passed an Object of arrays which contain all of the data
+             * 2.) Set the data to allStations
+             * this.setState({
+             *      allStations: data
+             * })
+             */
 
         }catch(e){
             console.log(`Error: ${e}`)
