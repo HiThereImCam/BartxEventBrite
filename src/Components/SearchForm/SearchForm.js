@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import "./_SearchForm.scss";
 
-
-
 class SearchForm extends Component {
     constructor(props){
         super(props);
@@ -24,9 +22,10 @@ class SearchForm extends Component {
 
     async getAllStations(){
         try{
-            const response = await fetch(``);
-            // console.log(response.json());
-            // const data = await response.json();
+            const response = await fetch(`/base-station-routes`);
+            const data = await response.json();           
+
+            console.log(data);
             // this.setState({
             //     allStations: data.root.station
             // })
