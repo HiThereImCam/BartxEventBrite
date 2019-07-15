@@ -6,11 +6,7 @@
   background-size:cover;
   background-position:center;
   position: relative;
-
-  &__test{
-    position: absolute;
-    top: 0%;
-    left: 100%;
-    background: white;
-  }
 }
+
+@import "../Components/SearchForm/Searchform";
+@import "../Components/SearchForm/FormTable/FormTable";

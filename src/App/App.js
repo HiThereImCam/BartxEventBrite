@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './_App.scss';
-import SearchForms from '../Components/SearchForm/SearchForm.js';
+import Searchform from '../Components/SearchForm/Searchform.js';
 
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <SearchForms/>
+          <Searchform/>
       </div>
     );
   }
