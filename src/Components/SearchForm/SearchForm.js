@@ -32,7 +32,9 @@ class SearchForm extends React.Component{
     }
 
     handleSubmission = e => {
-        
+        e.preventDefault();
+        console.log(`this state: `, this.state)
+        this.props.updateParentState(this.state);
     }
 
     render(){
