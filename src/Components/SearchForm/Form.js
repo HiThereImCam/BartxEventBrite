@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment  } from 'react';
+import axios from 'axios'; 
 import "./_Form.scss";
 import SearchForm from "./SearchForm.js";
 
@@ -8,65 +9,42 @@ class Form extends Component {
         super(props);
 
         this.state = {
-            // selectedStation: 'ALL',
-            // departingStation: null,
-                // baseStations: [],
-                // isLoading: true,
-            arrival: "",
             departure: "",
-            time: "",
-            date: ""
-        }
-
-        // this.getBaseStations = this.getBaseStations.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
-        
+            arrival: ""
+            // time: "",
+            // date: ""
+        }     
     }
-
-    // componentDidMount(){
-    //     this.getBaseStations();
-    //     this.timingFunction = setInterval(() => this.getBaseStations(), 111000);
-    // }
-    
-
-    // async getBaseStations(){
-    //     try{
-
-    //         const response = await fetch(`/base-station-routes`);
-    //         let data = await response.json();     
-            
-    //         const bartData = Object.entries(data);
-    //         this.setState({
-    //             allStations: bartData,
-    //             isLoading: false
-    //         });
-    //     }catch(e){
-    //         console.log(`Error: ${e}`)
-    //     }
-        
-    // }
 
     updateState = newState => {
-        this.state({ newState })
+        this.setState( newState )
     }
 
-    componentDidUpdate(prevProps, prevState){
-        const { arrival, departure } = this.state;
-        console.log(`Arrival: ${ arrival }`, `Departure: ${ departure }`)
+    componentDidUpdate( prevProp, prevState ){
+        const { departure, arrival} = this.state;
+        console.log(` Departure: ${ departure }`, `Arrival: ${ arrival }`);
+
+        axios.get('http://localhost:3001/route-submission', {
+            params: {
+                departure: departure,
+                arrival: arrival
+            }  
+        }).then( res => {
+           console.log(res);
+        })
     }
 
     render(){
-    //    const {  arrival, departure } = this.state;
-          const { updateState } = this.state;
+       const {  arrival, departure } = this.state;
+          
         return(
-            <SearchForm
-                // isLoading = {isLoading}
-                // baseStations = {baseStations}
-                // arrival = {arrival}
-                // departure = {departure}
-                updateParentState = { updateState }
-            />
+            <Fragment>
+                <SearchForm
+                    arrival = { arrival }
+                    departure = { departure }
+                    updateParentState = { this.updateState } 
+                /> 
+            </Fragment>
         )
     }
 }

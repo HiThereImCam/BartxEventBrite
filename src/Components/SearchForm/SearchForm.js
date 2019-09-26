@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
+import "./_SearchForm.scss"
 // import FormTable from './FormTable/FormTable.js';
 
 
-class SearchForm extends React.Component{
+class SearchForm extends Component{
 
    constructor(props){
     super(props)
@@ -13,18 +14,10 @@ class SearchForm extends React.Component{
     }
    }
 
-    // handleChange(event){
-    //     // this.setState({
-    //     //     [event.target.name]: [event.target.value]
-    //     // })
-
-    //     this.props.inputChange(event.target.value);
-    // }
-
     handleInput = e => {
         const { name, value } = e.target;
-        console.log('Name: ', name);
-        console.log('Value: ', value);
+        // console.log('Name: ', name);
+        // console.log('Value: ', value);
 
         this.setState({
             [name]: value
@@ -33,7 +26,6 @@ class SearchForm extends React.Component{
 
     handleSubmission = e => {
         e.preventDefault();
-        console.log(`this state: `, this.state)
         this.props.updateParentState(this.state);
     }
 
@@ -71,7 +63,7 @@ class SearchForm extends React.Component{
                                         onChange={this.handleInput}
                                     />
                                 </div>
-                                <div className="form__dateAndTimeParent">
+                                {/* <div className="form__dateAndTimeParent">
                                     <div className="form__dateAndTime">
                                         <label htmlFor="date" className="form__dateAndTime-label"> Date </label>
                                         <input 
@@ -90,13 +82,7 @@ class SearchForm extends React.Component{
                                             placeholder=" 9:00 AM "
                                         />
                                     </div>
-                                </div>
-                                {/* <div className="form__tableParent">
-                                    { isLoading ? console.log("Loading") :
-                                        <FormTable data = { baseStations } />
-                                    }   
                                 </div> */}
-                                
                                 <div className="form__btn">
                                     <button className="form__searchBtn" type="submit">Search</button>
                                 </div>
