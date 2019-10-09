@@ -1,20 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './_index.scss';
-import App from './App/App';
+import App from './Components/App/App';
+// import reducer from './reducers';
+// import middleware from './middleware';
+// import { Provider } from 'react-redux';
+// import { createStore } from 'redux';
 import * as serviceWorker from './serviceWorker';
 
 const rootEl = document.getElementById('root')
-
+// const store = createStore(reducer, middleware);
 
 ReactDOM.render(
+
+  // <Provider store = { store }>
+  //    <App />
+  // </Provider>,
   <App />,
   rootEl
 )
 
 if (module.hot) {
-  module.hot.accept('./App/App', () => {
-    const App = require('./App/App').default
+  module.hot.accept('./Components/App/App', () => {
+    const App = require('./Components/App/App').default
     ReactDOM.render(
       <App />,
       rootEl

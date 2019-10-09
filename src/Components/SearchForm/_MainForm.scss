@@ -4,12 +4,12 @@ $default-font-weight: 600;
 // airbnb style box shadow:
 //     box-shadow: 0 16px 40px rgba(0,0,0,0.12);
 
-.form__overall{
+.form__container{
     display: flex;
     position: relative;
 }
 
-.form__container{
+.form__insideContainer{
     background-color: white;
     position: absolute;
     height: 61rem;
@@ -20,7 +20,7 @@ $default-font-weight: 600;
     box-shadow: 0.2rem 0.2rem 4rem 0px rgba(0,0,0,0.75);
 }
 
-.form__insideContainer{
+.form__insideDisplay{
     display: flex;
     align-items: center;
 }
@@ -121,6 +121,5 @@ $default-font-weight: 600;
     }
 
 }
-        
 
         
