@@ -18,6 +18,8 @@
 .env.test.local
 .env.production.local
 .env
+Website_Form_Update.png
+
 
 npm-debug.log*
 yarn-debug.log*
