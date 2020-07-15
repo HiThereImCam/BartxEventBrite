@@ -1,17 +1,51 @@
-import React, { Component } from 'react';
-import './_App.scss';
-import MainForm from '../SearchForm/MainForm.js';
+import React, { useState, useEffect } from "react";
+import MainFormView from "../SearchForm/MainFormView";
+import "./_App.scss";
+// const reactURL = process.env.REACT_APP_API_URL;
+// ${reactURL}
+// const MainFormView = React.lazy(() => import("../SearchForm/MainFormView"));
+function App() {
+  /**
+   * Upon start up, call bart API to get list of stations
+   *
+   */
 
+  const [getStations, setStations] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
-class App extends Component {
-  
-  render() {
-    return (
-      <div className="App">
-          <MainForm/>
-      </div>
-    );
-  }
+  /**
+   * using useEffect on initial render
+   * want list of stations on initial render
+   *
+   * mental note: we need to save off the bart data
+   * for the predictive functionality
+   *
+   * Need to learn how to cache it for later use
+   *
+   */
+
+  useEffect(() => {
+    let fetchStations = async () => {
+      try {
+        const resData = await fetch(`http://localhost:3001/getStations`);
+        const stationRes = await resData.json();
+
+        console.log("Received");
+
+        setStations(stationRes);
+      } catch (e) {
+        console.log("Error: ", e);
+      }
+    };
+
+    fetchStations();
+  }, []);
+
+  return (
+    <div className="App">
+      <MainFormView stationInfo={getStations} />
+    </div>
+  );
 }
 
 export default App;
