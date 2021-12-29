@@ -252,7 +252,8 @@ function MainFormView(props) {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const [submitted, setSubmitted] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
+  const [arrivalEmpty, setArrivalEmpty] = useState(false);
+  const [departureEmpty, setDepartureEmpty] = useState(false);
   const { arrival, departure } = state;
 
   const handleInput = e => {
@@ -267,12 +268,21 @@ function MainFormView(props) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (departure === "" || arrival === "") {
-      setIsEmpty(true);
-    } else {
-      setSubmitted(true);
+    if (departure === "" && arrival === "") {
+      setArrivalEmpty(true);
+      setDepartureEmpty(true);
     }
+    if (arrival === "") {
+      setArrivalEmpty(true);
+    }
+    if (departure === "") {
+      setDepartureEmpty(true);
+    }
+
+    setSubmitted(true);
   };
+
+  // const handleClick = e => {};
 
   /**
    *
@@ -280,25 +290,28 @@ function MainFormView(props) {
    *
    * This function filters user input
    */
-  let autoComplete = input => {
-    return (
-      <div className="dropDown__wrapper">
-        <ul className="dropDown__list">
-          {stationInfo
-            .filter(
-              stationName => stationName.indexOf(input.toLowerCase()) > -1
-            )
-            .map((currVal, i) => {
-              return (
-                <div className="dropDown__list-Item" key={i}>
-                  {currVal}
-                </div>
-              );
-            })}
-        </ul>
-      </div>
-    );
-  };
+  // let dropDown = input => {
+  //   return (
+  //     <div className="dropDown__wrapper">
+  //       <ul className="dropDown__list">
+  //         {stationInfo
+  //           .filter(
+  //             stationName => stationName.indexOf(input.toLowerCase()) > -1
+  //           )
+  //           .map((currVal, i) => {
+  //             return (
+  //               <div className="dropDown__list-Item">
+  //                 <li key={i} onClick={handleClick}>
+  //                   {console.log("currVal", currVal)}
+  //                   {currVal}
+  //                 </li>
+  //               </div>
+  //             );
+  //           })}
+  //       </ul>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className="wrapper">
@@ -312,27 +325,41 @@ function MainFormView(props) {
             name="departure"
             value={departure}
             onChange={handleInput}
+            list={"stations"}
+            autoComplete="off"
             className={`${
-              isEmpty ? "form__Main-Input_Red" : "form__Main-Input"
+              departureEmpty ? "form__Main-Input_Red" : "form__Main-Input"
             }`}
           />
+          <datalist id="stations">
+            {stationInfo.map(station => (
+              <option key={station.abbr} value={station.name} />
+            ))}
+          </datalist>
 
-          {isEmpty && <p> Needs departure </p>}
+          {/* {departureEmpty && <p> Invalid </p>}
 
-          {departure.length > 0 && autoComplete(departure)}
+          {departure.length > 0 && dropDown(departure)} */}
 
           <input
             placeholder="Enter arriving station..."
             name="arrival"
             value={arrival}
+            autoComplete="off"
             onChange={handleInput}
             className={`${
-              isEmpty ? "form__Main-Input_Red" : "form__Main-Input"
+              arrivalEmpty ? "form__Main-Input_Red" : "form__Main-Input"
             }`}
           />
-          {isEmpty && <p> Needs arrival </p>}
+          <datalist id="stations">
+            {stationInfo.map(station => (
+              <option key={station.abbr} value={station.name} />
+            ))}
+          </datalist>
 
-          <div>{arrival.length > 0 && autoComplete(arrival)}</div>
+          {/* {arrivalEmpty && <p> Invalid </p>}
+
+          <div>{arrival.length > 0 && dropDown(arrival)}</div> */}
           <div>
             <button type="submit">Submit</button>
           </div>

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import MainFormView from "../SearchForm/MainFormView";
+import getData from "../util/getData";
 import "./_App.scss";
 // const reactURL = process.env.REACT_APP_API_URL;
 // ${reactURL}
@@ -10,6 +11,7 @@ function App() {
    *
    */
 
+  const [state, setState] = useReducer();
   const [getStations, setStations] = useState([]);
   // const [loading, setLoading] = useState(true);
 
@@ -27,12 +29,12 @@ function App() {
   useEffect(() => {
     let fetchStations = async () => {
       try {
-        const resData = await fetch(`http://localhost:3001/getStations`);
-        const stationRes = await resData.json();
-
-        console.log("Received");
-
-        setStations(stationRes);
+        // const resData = await fetch(`http://localhost:3001/getStations`);
+        // const stationRes = await resData.json();
+        let url = "http://localhost:3001/getStations";
+        // debugger;
+        let stationData = getData(url);
+        setStations(stationData);
       } catch (e) {
         console.log("Error: ", e);
       }
@@ -43,6 +45,7 @@ function App() {
 
   return (
     <div className="App">
+      {error}
       <MainFormView stationInfo={getStations} />
     </div>
   );
