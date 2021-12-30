@@ -43,6 +43,10 @@ function App() {
     let stationData: [] = await getData(stationUrl);
 
     if (!Array.isArray(stationData)) {
+      setState({ loading: false, error: stationData });
+    } else {
+      setStations(stationData);
+      setState({ loading: false, error: "" });
     }
   };
 
@@ -72,7 +76,7 @@ function App() {
       ) : error ? (
         <ErrorComponent error={error} />
       ) : (
-        <MainFormView stationInfo={getStations} />
+        <MainFormView stationInfo={stations} />
       )}
     </div>
   );
