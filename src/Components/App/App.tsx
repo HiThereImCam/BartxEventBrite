@@ -52,20 +52,6 @@ function App() {
 
   useEffect(() => {
     getStations();
-    // let fetchStations = async () => {
-    //   try {
-    //     // const resData = await fetch(`http://localhost:3001/getStations`);
-    //     // const stationRes = await resData.json();
-    //     let url = "http://localhost:3001/getStations";
-    //     // debugger;
-    //     let stationData = getData(url);
-    //     setStations(stationData);
-    //   } catch (e) {
-    //     console.log("Error: ", e);
-    //   }
-    // };
-
-    // fetchStations();
   }, []);
 
   let { loading, error } = state;

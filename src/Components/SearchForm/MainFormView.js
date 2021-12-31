@@ -282,37 +282,6 @@ function MainFormView(props) {
     setSubmitted(true);
   };
 
-  // const handleClick = e => {};
-
-  /**
-   *
-   * @param {*} input
-   *
-   * This function filters user input
-   */
-  // let dropDown = input => {
-  //   return (
-  //     <div className="dropDown__wrapper">
-  //       <ul className="dropDown__list">
-  //         {stationInfo
-  //           .filter(
-  //             stationName => stationName.indexOf(input.toLowerCase()) > -1
-  //           )
-  //           .map((currVal, i) => {
-  //             return (
-  //               <div className="dropDown__list-Item">
-  //                 <li key={i} onClick={handleClick}>
-  //                   {console.log("currVal", currVal)}
-  //                   {currVal}
-  //                 </li>
-  //               </div>
-  //             );
-  //           })}
-  //       </ul>
-  //     </div>
-  //   );
-  // };
-
   return (
     <div className="wrapper">
       <div className="form">
@@ -372,3 +341,34 @@ function MainFormView(props) {
 }
 
 export default MainFormView;
+
+// const handleClick = e => {};
+
+/**
+ *
+ * @param {*} input
+ *
+ * This function filters user input
+ */
+// let dropDown = input => {
+//   return (
+//     <div className="dropDown__wrapper">
+//       <ul className="dropDown__list">
+//         {stationInfo
+//           .filter(
+//             stationName => stationName.indexOf(input.toLowerCase()) > -1
+//           )
+//           .map((currVal, i) => {
+//             return (
+//               <div className="dropDown__list-Item">
+//                 <li key={i} onClick={handleClick}>
+//                   {console.log("currVal", currVal)}
+//                   {currVal}
+//                 </li>
+//               </div>
+//             );
+//           })}
+//       </ul>
+//     </div>
+//   );
+// };
