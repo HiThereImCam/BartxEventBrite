@@ -1,0 +1,236 @@
+$default-font-size: 1.6rem;
+$header-font-size: 5rem;
+$default-font-weight: 600;
+$default-font-color: #474747;
+
+// airbnb style box shadow:
+//     box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  background-color: white;
+  height: 61rem;
+  width: 44.1rem;
+  top: 11.5rem;
+  left: 10rem;
+  border-radius: 3px;
+  box-shadow: 0.2rem 0.2rem 4rem 0px rgba(0, 0, 0, 0.75);
+}
+
+.form {
+  width: 100%;
+
+  &__Header {
+    font-size: $header-font-size;
+    color: $default-font-color;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  &__Main {
+    border: 0.5rem;
+    margin: 1rem;
+
+    & h3 {
+      font-weight: $default-font-weight;
+      font-size: $default-font-size;
+      color: $default-font-color;
+      margin: 1rem 0 0.1rem 0;
+    }
+
+    &-Input {
+      display: block;
+      font-size: $default-font-size;
+      border: 1px solid rgb(222, 222, 222);
+      border-radius: 3px;
+      padding: 1rem;
+      margin: 1.2rem 0;
+      width: 75%;
+    }
+
+    &-Input_Red {
+      display: block;
+      font-size: $default-font-size;
+      border-radius: 3px;
+      border: 1px solid red;
+      padding: 1rem;
+      margin: 1.2rem 0;
+      width: 75%;
+      outline: none;
+    }
+  }
+}
+
+.dropDown {
+  &__wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  &__list {
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    max-height: 200px;
+    border: 1px solid #ddd;
+    z-index: 1;
+    overflow: hidden;
+
+    &-Item {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+  }
+}
+
+// .form__Header {
+//   font-size: 1.5rem;
+//   text-align: center;
+//   width: 100%;
+//   height: 10rem;
+//   margin: 1rem;
+//   padding: 0.5rem;
+//   color: #474747;
+//   border: 5px solid red;
+// }
+
+// .form__Header h3 {
+//   position: relative;
+//   z-index: 1;
+// }
+
+// .form {
+//   border: 5px solid blue;
+//   margin-top: 10rem;
+// }
+
+// .form__insideContainer {
+//   background-color: white;
+//   position: absolute;
+//   height: 61rem;
+//   width: 44.1rem;
+//   top: 11.5rem;
+//   left: 10rem;
+//   border-radius: 3px;
+//   box-shadow: 0.2rem 0.2rem 4rem 0px rgba(0, 0, 0, 0.75);
+// }
+
+// .form__insideDisplay {
+//   display: flex;
+//   align-items: center;
+// }
+
+// .form {
+//   padding: 3rem;
+//   box-sizing: border-box;
+//   border: solid red;
+//   // height: 100%;
+//   // width: 100%;
+
+//   &__Header {
+//     font-size: 1.5rem;
+//     margin-bottom: 2rem;
+//     color: #474747;
+//     align-items: center;
+//   }
+
+//   &__group {
+//     margin-bottom: 1;
+//     // border-radius: 3px;
+//     display: inline-block;
+//     justify-content: center;
+//     // background-color: red;
+//     width: 100%;
+//   }
+
+//   &__btn {
+//     text-align: right;
+//   }
+
+//   &__searchBtn {
+//     font-size: 1.7rem;
+//     font-weight: 800;
+//     // padding: 0.6rem 1.2rem;
+//     margin-bottom: 0;
+
+//     display: inline-block;
+//     color: #fff;
+//     cursor: pointer;
+//     background-color: #007bff;
+//     border-radius: 0.4rem;
+//     border-width: 0.2rem;
+//     line-height: 2.4rem;
+//     padding: 1rem 2.2rem;
+//   }
+
+//   &__label {
+//     display: block;
+//     color: #474747;
+//     font-weight: $default-font-weight;
+//     font-size: 1.5rem;
+//     margin-top: 1rem;
+//   }
+
+//   &__input {
+//     font-size: $default-font-size;
+//     border: 1px solid rgb(222, 222, 222);
+//     border-radius: 3px;
+//     padding: 1rem;
+//     margin: 1.2rem 0;
+//     width: 100%;
+//   }
+
+//   &__dateAndTimeParent {
+//     position: relative;
+//     margin-top: 0.8rem;
+//   }
+
+//   &__dateAndTime {
+//     width: 50%;
+//     display: inline-block;
+//     overflow: hidden;
+//   }
+
+//   &__dateAndTime-label {
+//     display: block;
+//     color: #474747;
+//     font-weight: $default-font-weight;
+//     font-size: 1.5rem;
+//   }
+
+//   &__dateAndTime-input {
+//     font-size: $default-font-size;
+//     border: 1px solid rgb(222, 222, 222);
+//     border-radius: 3px;
+//     padding: 1rem;
+//     margin: 1.2rem 0;
+//     width: 99.99%;
+//   }
+
+//   //   &__tableParent {
+//   //     margin: 1.2rem 0;
+//   //     display: inline-block;
+//   //     width: 100%;
+//   //     height: 12rem;
+//   //     overflow: hidden;
+//   //     border: 1px solid rgb(222, 222, 222);
+//   //     border-radius: 3px;
+//   //   }
+// }
+
+@media screen and (max-width: 744px) {
+  //   .form__insideContainer {
+  //     flex-direction: row;
+  //     width: 100%;
+  //   }
+}
+
+@media screen and (max-height: 744px) {
+  .wrapper {
+    height: 55rem;
+  }
+}

@@ -1,12 +1,19 @@
-.App{
+@import "../SearchForm/MainFormView";
+
+.App {
   height: 100vh;
   width: 100%;
-  background-image: url("./backgroundIMG.jpg");
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
+  // background-image: url("./backgroundIMG_PS.jpg");
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // background-position: center;
   position: relative;
+
+  // @media (max-width: 744px) {
+  //   height: 410px;
+  //   width: 744px;
+  //   background-image: url("./Mobile_Background_Possible.jpg");
+  // }
 }
 
 // @import "../SearchForm/SearchForm";
-@import "../SearchForm/MainForm";
