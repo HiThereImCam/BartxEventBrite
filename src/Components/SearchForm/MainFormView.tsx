@@ -232,23 +232,67 @@
 //   );
 // }
 
-import React, { useReducer, useState } from "react";
-import AutoComplete from "../Reusables/AutoComplete";
+// const initialState = {
+//   arrival: "",
+//   departure: ""
+// };
 
-const initialState = {
-  arrival: "",
-  departure: ""
+// function reducer(state, { field, value }) {
+//   return {
+//     ...state,
+//     [field]: value
+//   };
+// }
+
+import React from "react";
+
+export type StationInfoProps = {
+  abbr: string;
+  name: string;
 };
 
-function reducer(state, { field, value }) {
-  return {
-    ...state,
-    [field]: value
-  };
+interface MainFormViewProps {
+  stationInfo: StationInfoProps[];
 }
 
-function MainFormView(props) {
+export const MainFormView = (props: MainFormViewProps) => {
   const { stationInfo } = props;
+  return <div>hello</div>;
+};
+
+// const handleClick = e => {};
+
+/**
+ *
+ * @param {*} input
+ *
+ * This function filters user input
+ */
+// let dropDown = input => {
+//   return (
+//     <div className="dropDown__wrapper">
+//       <ul className="dropDown__list">
+//         {stationInfo
+//           .filter(
+//             stationName => stationName.indexOf(input.toLowerCase()) > -1
+//           )
+//           .map((currVal, i) => {
+//             return (
+//               <div className="dropDown__list-Item">
+//                 <li key={i} onClick={handleClick}>
+//                   {console.log("currVal", currVal)}
+//                   {currVal}
+//                 </li>
+//               </div>
+//             );
+//           })}
+//       </ul>
+//     </div>
+//   );
+// };
+
+/**
+ const { stationInfo } = props;
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const [submitted, setSubmitted] = useState(false);
@@ -306,9 +350,9 @@ function MainFormView(props) {
             ))}
           </datalist>
 
-          {/* {departureEmpty && <p> Invalid </p>}
+          departureEmpty && <p> Invalid </p>
 
-          {departure.length > 0 && dropDown(departure)} */}
+          departure.length > 0 && dropDown(departure)
 
           <input
             placeholder="Enter arriving station..."
@@ -326,9 +370,9 @@ function MainFormView(props) {
             ))}
           </datalist>
 
-          {/* {arrivalEmpty && <p> Invalid </p>}
+           {arrivalEmpty && <p> Invalid </p>}
 
-          <div>{arrival.length > 0 && dropDown(arrival)}</div> */}
+          <div>{arrival.length > 0 && dropDown(arrival)}</div>
           <div>
             <button type="submit">Submit</button>
           </div>
@@ -337,38 +381,9 @@ function MainFormView(props) {
         <div>{submitted && <AutoComplete input={state} />}</div>
       </div>
     </div>
-  );
-}
+  ); 
 
-export default MainFormView;
 
-// const handleClick = e => {};
 
-/**
- *
- * @param {*} input
- *
- * This function filters user input
+
  */
-// let dropDown = input => {
-//   return (
-//     <div className="dropDown__wrapper">
-//       <ul className="dropDown__list">
-//         {stationInfo
-//           .filter(
-//             stationName => stationName.indexOf(input.toLowerCase()) > -1
-//           )
-//           .map((currVal, i) => {
-//             return (
-//               <div className="dropDown__list-Item">
-//                 <li key={i} onClick={handleClick}>
-//                   {console.log("currVal", currVal)}
-//                   {currVal}
-//                 </li>
-//               </div>
-//             );
-//           })}
-//       </ul>
-//     </div>
-//   );
-// };
