@@ -244,11 +244,18 @@
 //   };
 // }
 
-import React from "react";
+import React, { useState, useReducer } from "react";
 
 export type StationInfoProps = {
   abbr: string;
   name: string;
+};
+
+type TravelTypes = {
+  arrival?: string;
+  departure?: string;
+  arrivalEmpty?: boolean;
+  departureEmpty?: boolean;
 };
 
 interface MainFormViewProps {
@@ -257,7 +264,59 @@ interface MainFormViewProps {
 
 export const MainFormView = (props: MainFormViewProps) => {
   const { stationInfo } = props;
-  return <div>hello</div>;
+  const [
+    { arrival, departure, arrivalEmpty, departureEmpty },
+    setTravelState
+  ] = useState<TravelTypes>({
+    arrival: "",
+    departure: "",
+    arrivalEmpty: false,
+    departureEmpty: false
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (departure === "" && arrival === "") {
+      setTravelState({
+        arrivalEmpty: true,
+        departureEmpty: true
+      });
+    } else if (arrival === "") {
+      setTravelState({ arrivalEmpty: true });
+    } else if (departure === "") {
+      setTravelState({ departureEmpty: true });
+    } else {
+      // need to submit information if true
+      setSubmitted(true);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setTravelState({ [name]: value });
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          placeholder="Enter departing station..."
+          name="departure"
+          value={departure}
+          onChange={handleInputChange}
+          list={"stations"}
+          autoComplete="off"
+          className={`${
+            departureEmpty ? "form__Main-Input_Red" : "form__Main-Input"
+          }`}
+        />
+      </form>
+    </div>
+  );
 };
 
 // const handleClick = e => {};
@@ -309,22 +368,7 @@ export const MainFormView = (props: MainFormViewProps) => {
     });
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
 
-    if (departure === "" && arrival === "") {
-      setArrivalEmpty(true);
-      setDepartureEmpty(true);
-    }
-    if (arrival === "") {
-      setArrivalEmpty(true);
-    }
-    if (departure === "") {
-      setDepartureEmpty(true);
-    }
-
-    setSubmitted(true);
-  };
 
   return (
     <div className="wrapper">
