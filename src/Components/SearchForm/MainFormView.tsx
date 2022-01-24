@@ -244,7 +244,10 @@
 //   };
 // }
 
-import React, { useState, useReducer } from "react";
+import React, { useState } from "react";
+import { AxiosResponse } from "axios";
+import submitStationInfo from "../util/submitStationInfo";
+import TravelResults from "../Travel/TravelResults";
 
 export type StationInfoProps = {
   abbr: string;
@@ -270,32 +273,36 @@ export const MainFormView = (props: MainFormViewProps) => {
   ] = useState<TravelTypes>({
     arrival: "",
     departure: "",
-    arrivalEmpty: false,
-    departureEmpty: false
+    arrivalEmpty: true,
+    departureEmpty: true
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [travelInfo, setTravelInfo] = useState<AxiosResponse | undefined>();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (departure === "" && arrival === "") {
-      setTravelState({
-        arrivalEmpty: true,
-        departureEmpty: true
-      });
-    } else if (arrival === "") {
-      setTravelState({ arrivalEmpty: true });
-    } else if (departure === "") {
-      setTravelState({ departureEmpty: true });
-    } else {
-      // need to submit information if true
+    if (arrival && departure) {
       setSubmitted(true);
+      let travelResponse = await submitStationInfo({
+        travelInfo: [arrival, departure]
+      });
+      if (travelResponse) {
+        setTravelInfo(travelResponse);
+      }
     }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    // if (name === "arrival" && arrivalEmpty) {
+    //   setTravelState({ arrivalEmpty: false });
+    // }
+    // if (name === "departure" && departureEmpty) {
+    //   setTravelState({ departureEmpty: false });
+    // }
 
     setTravelState({ [name]: value });
   };
@@ -314,10 +321,38 @@ export const MainFormView = (props: MainFormViewProps) => {
             departureEmpty ? "form__Main-Input_Red" : "form__Main-Input"
           }`}
         />
+        <input
+          placeholder="Enter arriving station..."
+          name="arrival"
+          value={arrival}
+          autoComplete="off"
+          onChange={handleInputChange}
+          className={`${
+            arrivalEmpty ? "form__Main-Input_Red" : "form__Main-Input"
+          }`}
+        />
       </form>
+      {travelInfo && <TravelResults travelInfo={travelInfo} />}
     </div>
   );
 };
+
+/**
+ * The problem:
+ *  I want to be able to display certain errors based on
+ *  whether or not arrival/departure has the correct values
+ */
+
+// } else if (departure === "" && arrival === "") {
+//   setTravelState({
+//     arrivalEmpty: true,
+//     departureEmpty: true
+//   });
+// } else if (arrival === "") {
+//   setTravelState({ arrivalEmpty: true });
+// } else {
+//   setTravelState({ departureEmpty: true });
+// }
 
 // const handleClick = e => {};
 
