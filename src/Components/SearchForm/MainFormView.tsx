@@ -232,115 +232,128 @@
 //   );
 // }
 
-import React, { useReducer, useState } from "react";
-import AutoComplete from "../Reusables/AutoComplete";
+// const initialState = {
+//   arrival: "",
+//   departure: ""
+// };
 
-const initialState = {
-  arrival: "",
-  departure: ""
+// function reducer(state, { field, value }) {
+//   return {
+//     ...state,
+//     [field]: value
+//   };
+// }
+
+import React, { useState } from "react";
+import { AxiosResponse } from "axios";
+import submitStationInfo from "../util/submitStationInfo";
+import TravelResults from "../Travel/TravelResults";
+
+export type StationInfoProps = {
+  abbr: string;
+  name: string;
 };
 
-function reducer(state, { field, value }) {
-  return {
-    ...state,
-    [field]: value
-  };
+type TravelTypes = {
+  arrival?: string;
+  departure?: string;
+  arrivalEmpty?: boolean;
+  departureEmpty?: boolean;
+};
+
+interface MainFormViewProps {
+  stationInfo: StationInfoProps[];
 }
 
-function MainFormView(props) {
+export const MainFormView = (props: MainFormViewProps) => {
   const { stationInfo } = props;
+  const [
+    { arrival, departure, arrivalEmpty, departureEmpty },
+    setTravelState
+  ] = useState<TravelTypes>({
+    arrival: "",
+    departure: "",
+    arrivalEmpty: true,
+    departureEmpty: true
+  });
 
-  const [state, dispatch] = useReducer(reducer, initialState);
   const [submitted, setSubmitted] = useState(false);
-  const [arrivalEmpty, setArrivalEmpty] = useState(false);
-  const [departureEmpty, setDepartureEmpty] = useState(false);
-  const { arrival, departure } = state;
+  const [travelInfo, setTravelInfo] = useState<AxiosResponse | undefined>();
 
-  const handleInput = e => {
-    const { name, value } = e.target;
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    dispatch({
-      field: name,
-      value: value
-    });
+    if (arrival && departure) {
+      setSubmitted(true);
+      let travelResponse = await submitStationInfo({
+        travelInfo: [arrival, departure]
+      });
+      if (travelResponse) {
+        setTravelInfo(travelResponse);
+      }
+    }
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
 
-    if (departure === "" && arrival === "") {
-      setArrivalEmpty(true);
-      setDepartureEmpty(true);
-    }
-    if (arrival === "") {
-      setArrivalEmpty(true);
-    }
-    if (departure === "") {
-      setDepartureEmpty(true);
-    }
+    // if (name === "arrival" && arrivalEmpty) {
+    //   setTravelState({ arrivalEmpty: false });
+    // }
+    // if (name === "departure" && departureEmpty) {
+    //   setTravelState({ departureEmpty: false });
+    // }
 
-    setSubmitted(true);
+    setTravelState({ [name]: value });
   };
 
   return (
-    <div className="wrapper">
-      <div className="form">
-        <h1 className="form__Header"> Welcome! </h1>
-        <form className="form__Main" onSubmit={handleSubmit}>
-          <h3> Where are we going today? </h3>
-
-          <input
-            placeholder="Enter departing station..."
-            name="departure"
-            value={departure}
-            onChange={handleInput}
-            list={"stations"}
-            autoComplete="off"
-            className={`${
-              departureEmpty ? "form__Main-Input_Red" : "form__Main-Input"
-            }`}
-          />
-          <datalist id="stations">
-            {stationInfo.map(station => (
-              <option key={station.abbr} value={station.name} />
-            ))}
-          </datalist>
-
-          {/* {departureEmpty && <p> Invalid </p>}
-
-          {departure.length > 0 && dropDown(departure)} */}
-
-          <input
-            placeholder="Enter arriving station..."
-            name="arrival"
-            value={arrival}
-            autoComplete="off"
-            onChange={handleInput}
-            className={`${
-              arrivalEmpty ? "form__Main-Input_Red" : "form__Main-Input"
-            }`}
-          />
-          <datalist id="stations">
-            {stationInfo.map(station => (
-              <option key={station.abbr} value={station.name} />
-            ))}
-          </datalist>
-
-          {/* {arrivalEmpty && <p> Invalid </p>}
-
-          <div>{arrival.length > 0 && dropDown(arrival)}</div> */}
-          <div>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-
-        <div>{submitted && <AutoComplete input={state} />}</div>
-      </div>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          placeholder="Enter departing station..."
+          name="departure"
+          value={departure}
+          onChange={handleInputChange}
+          list={"stations"}
+          autoComplete="off"
+          className={`${
+            departureEmpty ? "form__Main-Input_Red" : "form__Main-Input"
+          }`}
+        />
+        <input
+          placeholder="Enter arriving station..."
+          name="arrival"
+          value={arrival}
+          autoComplete="off"
+          onChange={handleInputChange}
+          className={`${
+            arrivalEmpty ? "form__Main-Input_Red" : "form__Main-Input"
+          }`}
+        />
+        <button type="submit">Submit</button>
+      </form>
+      {travelInfo && <TravelResults travelInfo={travelInfo} />}
     </div>
   );
-}
+};
 
-export default MainFormView;
+/**
+ * The problem:
+ *  I want to be able to display certain errors based on
+ *  whether or not arrival/departure has the correct values
+ */
+
+// } else if (departure === "" && arrival === "") {
+//   setTravelState({
+//     arrivalEmpty: true,
+//     departureEmpty: true
+//   });
+// } else if (arrival === "") {
+//   setTravelState({ arrivalEmpty: true });
+// } else {
+//   setTravelState({ departureEmpty: true });
+// }
 
 // const handleClick = e => {};
 
@@ -372,3 +385,85 @@ export default MainFormView;
 //     </div>
 //   );
 // };
+
+/**
+ const { stationInfo } = props;
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [submitted, setSubmitted] = useState(false);
+  const [arrivalEmpty, setArrivalEmpty] = useState(false);
+  const [departureEmpty, setDepartureEmpty] = useState(false);
+  const { arrival, departure } = state;
+
+  const handleInput = e => {
+    const { name, value } = e.target;
+
+    dispatch({
+      field: name,
+      value: value
+    });
+  };
+
+
+
+  return (
+    <div className="wrapper">
+      <div className="form">
+        <h1 className="form__Header"> Welcome! </h1>
+        <form className="form__Main" onSubmit={handleSubmit}>
+          <h3> Where are we going today? </h3>
+
+          <input
+            placeholder="Enter departing station..."
+            name="departure"
+            value={departure}
+            onChange={handleInput}
+            list={"stations"}
+            autoComplete="off"
+            className={`${
+              departureEmpty ? "form__Main-Input_Red" : "form__Main-Input"
+            }`}
+          />
+          <datalist id="stations">
+            {stationInfo.map(station => (
+              <option key={station.abbr} value={station.name} />
+            ))}
+          </datalist>
+
+          departureEmpty && <p> Invalid </p>
+
+          departure.length > 0 && dropDown(departure)
+
+          <input
+            placeholder="Enter arriving station..."
+            name="arrival"
+            value={arrival}
+            autoComplete="off"
+            onChange={handleInput}
+            className={`${
+              arrivalEmpty ? "form__Main-Input_Red" : "form__Main-Input"
+            }`}
+          />
+          <datalist id="stations">
+            {stationInfo.map(station => (
+              <option key={station.abbr} value={station.name} />
+            ))}
+          </datalist>
+
+           {arrivalEmpty && <p> Invalid </p>}
+
+          <div>{arrival.length > 0 && dropDown(arrival)}</div>
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+
+        <div>{submitted && <AutoComplete input={state} />}</div>
+      </div>
+    </div>
+  ); 
+
+
+
+
+ */

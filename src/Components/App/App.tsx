@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useReducer } from "react";
-import MainFormView from "../SearchForm/MainFormView";
 import ErrorComponent from "../Reusables/ErrorComponent";
 import getData from "../util/getData";
 import "./_App.scss";
-// const reactURL = process.env.REACT_APP_API_URL;
+import { MainFormView, StationInfoProps } from "../SearchForm/MainFormView";
+// import stationInfoProps from "../SearchForm/MainFormView";
+
 const stationUrl = process.env.REACT_APP_STATIONS_URL;
-// ${reactURL}
-// const MainFormView = React.lazy(() => import("../SearchForm/MainFormView"));
 
 type reducerState = {
   loading: boolean;
@@ -25,8 +24,7 @@ function App() {
     }),
     { loading: true, error: "" }
   );
-  const [stations, setStations] = useState([]);
-  // const [loading, setLoading] = useState(true);
+  const [stations, setStations] = useState<Array<StationInfoProps>>([]);
 
   /**
    * using useEffect on initial render
@@ -40,7 +38,7 @@ function App() {
    */
 
   let getStations = async () => {
-    let stationData: [] = await getData(stationUrl);
+    let stationData: StationInfoProps[] = await getData(stationUrl);
 
     if (!Array.isArray(stationData)) {
       setState({ loading: false, error: stationData });
@@ -69,5 +67,3 @@ function App() {
 }
 
 export default App;
-
-//
