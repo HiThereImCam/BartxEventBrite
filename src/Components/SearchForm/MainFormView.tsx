@@ -331,6 +331,7 @@ export const MainFormView = (props: MainFormViewProps) => {
             arrivalEmpty ? "form__Main-Input_Red" : "form__Main-Input"
           }`}
         />
+        <button type="submit">Submit</button>
       </form>
       {travelInfo && <TravelResults travelInfo={travelInfo} />}
     </div>
