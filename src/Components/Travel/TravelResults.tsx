@@ -6,6 +6,7 @@ interface TravelResultsProps {
   travelInfo: AxiosResponse;
 }
 const TravelResults = (props: TravelResultsProps) => {
+  console.log("travel results props: ", props);
   return <div> Hello </div>;
 };
 

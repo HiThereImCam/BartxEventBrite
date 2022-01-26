@@ -244,7 +244,7 @@
 //   };
 // }
 
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { AxiosResponse } from "axios";
 import submitStationInfo from "../util/submitStationInfo";
 import TravelResults from "../Travel/TravelResults";
@@ -254,12 +254,12 @@ export type StationInfoProps = {
   name: string;
 };
 
-type TravelTypes = {
+interface TravelTypes {
   arrival?: string;
   departure?: string;
   arrivalEmpty?: boolean;
   departureEmpty?: boolean;
-};
+}
 
 interface MainFormViewProps {
   stationInfo: StationInfoProps[];
@@ -267,22 +267,44 @@ interface MainFormViewProps {
 
 export const MainFormView = (props: MainFormViewProps) => {
   const { stationInfo } = props;
-  const [
-    { arrival, departure, arrivalEmpty, departureEmpty },
-    setTravelState
-  ] = useState<TravelTypes>({
-    arrival: "",
-    departure: "",
-    arrivalEmpty: true,
-    departureEmpty: true
-  });
+  // const [
+  //   { arrival, departure, arrivalEmpty, departureEmpty },
+  //   setTravelState
+  // ] = useState<TravelTypes>({
+  //   arrival: "",
+  //   departure: "",
+  //   arrivalEmpty: true,
+  //   departureEmpty: true
+  // });
+  // const [
+  //   travelState,
+  //   setTravelState
+  // ] = useState<TravelTypes>({
+  //   arrival: "",
+  //   departure: "",
+  //   arrivalEmpty: true,
+  //   departureEmpty: true
+  // });
+
+  const [travelState, setTravelState] = useReducer(
+    (state: TravelTypes, newState: Partial<TravelTypes>) => ({
+      ...state,
+      ...newState
+    }),
+    {
+      arrival: "",
+      departure: "",
+      arrivalEmpty: true,
+      departureEmpty: true
+    }
+  );
 
   const [submitted, setSubmitted] = useState(false);
   const [travelInfo, setTravelInfo] = useState<AxiosResponse | undefined>();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    const { arrival, departure } = travelState;
     if (arrival && departure) {
       setSubmitted(true);
       let travelResponse = await submitStationInfo({
@@ -308,6 +330,7 @@ export const MainFormView = (props: MainFormViewProps) => {
   };
 
   return (
+    const { arrival, departure, arrivalEmpty, departureEmpty} = travelState;
     <div>
       <form onSubmit={handleSubmit}>
         <input
