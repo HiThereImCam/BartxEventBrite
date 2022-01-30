@@ -261,7 +261,7 @@ interface TravelTypes {
   departureEmpty?: boolean;
 }
 
-interface MainFormViewProps {
+export interface MainFormViewProps {
   stationInfo: StationInfoProps[];
 }
 
@@ -299,6 +299,8 @@ export const MainFormView = (props: MainFormViewProps) => {
     }
   );
 
+  // what if we need the abbr instead of the actual name?
+
   const [submitted, setSubmitted] = useState(false);
   const [travelInfo, setTravelInfo] = useState<AxiosResponse | undefined>();
 
@@ -307,10 +309,14 @@ export const MainFormView = (props: MainFormViewProps) => {
     const { arrival, departure } = travelState;
     if (arrival && departure) {
       setSubmitted(true);
-      let travelResponse = await submitStationInfo({
-        travelInfo: [arrival, departure]
-      });
+      let travelResponse = await submitStationInfo(
+        {
+          travelInfo: [arrival, departure]
+        },
+        stationInfo
+      );
       if (travelResponse) {
+        console.log("travelResponse: ", travelResponse);
         setTravelInfo(travelResponse);
       }
     }
@@ -319,18 +325,14 @@ export const MainFormView = (props: MainFormViewProps) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    // if (name === "arrival" && arrivalEmpty) {
-    //   setTravelState({ arrivalEmpty: false });
-    // }
-    // if (name === "departure" && departureEmpty) {
-    //   setTravelState({ departureEmpty: false });
-    // }
+    // check if value is true
+    // if value is true- get the abbr
 
     setTravelState({ [name]: value });
   };
 
+  const { arrival, departure, arrivalEmpty, departureEmpty } = travelState;
   return (
-    const { arrival, departure, arrivalEmpty, departureEmpty} = travelState;
     <div>
       <form onSubmit={handleSubmit}>
         <input
@@ -490,3 +492,10 @@ export const MainFormView = (props: MainFormViewProps) => {
 
 
  */
+
+// if (name === "arrival" && arrivalEmpty) {
+//   setTravelState({ arrivalEmpty: false });
+// }
+// if (name === "departure" && departureEmpty) {
+//   setTravelState({ departureEmpty: false });
+// }

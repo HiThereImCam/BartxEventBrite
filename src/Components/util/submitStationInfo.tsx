@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import checkErrorStatus from "./checkErrorStatus";
+import getStationAbbr from "./getStationAbbr";
+import { StationInfoProps } from "../SearchForm/MainFormView";
 
 const routeSubmissionUrl = process.env.REACT_APP_SUBMISSION_URL;
 
@@ -16,8 +18,16 @@ interface SubmittedStationInfoProps {
   travelInfo: string[];
 }
 
-const submitStationInfo = async (props: SubmittedStationInfoProps) => {
-  const [arrival, departure] = props.travelInfo;
+const submitStationInfo = async (
+  submissionInfo: SubmittedStationInfoProps,
+  stationInfo: StationInfoProps[]
+) => {
+  const [arrival, departure] = submissionInfo.travelInfo;
+  let arrivalAbbr = getStationAbbr(arrival, stationInfo);
+  let departureAbbr = getStationAbbr(departure, stationInfo);
+
+  console.log("arrivalAbbr: ", arrivalAbbr);
+  console.log("departureAbbr: ", departureAbbr);
 
   /**
    * only receivng departure information for now but will receive event
@@ -28,8 +38,8 @@ const submitStationInfo = async (props: SubmittedStationInfoProps) => {
       routeSubmissionUrl,
       {
         params: {
-          arrival: arrival,
-          departure: departure
+          arrival: arrivalAbbr,
+          departure: departureAbbr
         }
       }
     );
