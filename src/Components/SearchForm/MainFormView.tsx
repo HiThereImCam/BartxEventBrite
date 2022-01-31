@@ -316,8 +316,8 @@ export const MainFormView = (props: MainFormViewProps) => {
         stationInfo
       );
       if (travelResponse) {
-        console.log("travelResponse: ", travelResponse);
         setTravelInfo(travelResponse);
+        setSubmitted(true);
       }
     }
   };
@@ -334,31 +334,34 @@ export const MainFormView = (props: MainFormViewProps) => {
   const { arrival, departure, arrivalEmpty, departureEmpty } = travelState;
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Enter departing station..."
-          name="departure"
-          value={departure}
-          onChange={handleInputChange}
-          list={"stations"}
-          autoComplete="off"
-          className={`${
-            departureEmpty ? "form__Main-Input_Red" : "form__Main-Input"
-          }`}
-        />
-        <input
-          placeholder="Enter arriving station..."
-          name="arrival"
-          value={arrival}
-          autoComplete="off"
-          onChange={handleInputChange}
-          className={`${
-            arrivalEmpty ? "form__Main-Input_Red" : "form__Main-Input"
-          }`}
-        />
-        <button type="submit">Submit</button>
-      </form>
-      {travelInfo && <TravelResults travelInfo={travelInfo} />}
+      {submitted && travelInfo ? (
+        <TravelResults travelInfo={travelInfo} />
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <input
+            placeholder="Enter departing station..."
+            name="departure"
+            value={departure}
+            onChange={handleInputChange}
+            list={"stations"}
+            autoComplete="off"
+            className={`${
+              departureEmpty ? "form__Main-Input_Red" : "form__Main-Input"
+            }`}
+          />
+          <input
+            placeholder="Enter arriving station..."
+            name="arrival"
+            value={arrival}
+            autoComplete="off"
+            onChange={handleInputChange}
+            className={`${
+              arrivalEmpty ? "form__Main-Input_Red" : "form__Main-Input"
+            }`}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      )}
     </div>
   );
 };

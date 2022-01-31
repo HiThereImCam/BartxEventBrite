@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
+import { Routes, Route } from "react-router-dom";
 import ErrorComponent from "../Reusables/ErrorComponent";
 import getData from "../util/getData";
 import "./_App.scss";
@@ -12,11 +13,6 @@ type reducerState = {
   error: string;
 };
 function App() {
-  /**
-   * Upon start up, call bart API to get list of stations
-   *
-   */
-
   const [state, setState] = useReducer(
     (state: reducerState, newState: reducerState) => ({
       ...state,
@@ -27,8 +23,7 @@ function App() {
   const [stations, setStations] = useState<Array<StationInfoProps>>([]);
 
   /**
-   * using useEffect on initial render
-   * want list of stations on initial render
+
    *
    * mental note: we need to save off the bart data
    * for the predictive functionality
@@ -60,7 +55,9 @@ function App() {
       ) : error ? (
         <ErrorComponent error={error} />
       ) : (
-        <MainFormView stationInfo={stations} />
+        <Routes>
+          <Route path="/" element={<MainFormView stationInfo={stations} />} />
+        </Routes>
       )}
     </div>
   );
