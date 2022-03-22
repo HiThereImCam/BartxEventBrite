@@ -1,6 +1,6 @@
 import React from "react";
 import { AxiosResponse } from "axios";
-import { TravelInfoTypes } from "../util/submitStationInfo";
+import { TravelInfoTypes } from "../../util/submitStationInfo";
 
 interface TravelResultsProps {
   travelInfo: AxiosResponse;

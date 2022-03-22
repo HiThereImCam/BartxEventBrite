@@ -246,7 +246,7 @@
 
 import React, { useState, useReducer, useEffect } from "react";
 import { AxiosResponse } from "axios";
-import submitStationInfo from "../util/submitStationInfo";
+import submitStationInfo from "../../util/submitStationInfo";
 
 import TravelResults from "../Travel/TravelResults";
 import Input from "./Input";

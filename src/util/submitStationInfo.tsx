@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import checkErrorStatus from "./checkErrorStatus";
 import getStationAbbr from "./getStationAbbr";
-import { StationInfoProps } from "../SearchForm/MainFormView";
+import { StationInfoProps } from "../Components/SearchForm/MainFormView";
 
 const routeSubmissionUrl = process.env.REACT_APP_SUBMISSION_URL;
 

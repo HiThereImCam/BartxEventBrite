@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { StationInfoProps } from "../SearchForm/MainFormView";
-import checkInputValues from "../util/checkInputValues";
+import checkInputValues from "../../util/checkInputValues/checkInputValues";
 
 interface Props {
   name: string;

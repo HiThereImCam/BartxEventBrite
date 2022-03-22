@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { Routes, Route } from "react-router-dom";
 import ErrorComponent from "../Reusables/ErrorComponent";
-import getData from "../util/getData";
+import getData from "../../util/getData";
 
 import "./_App.scss";
 import { MainFormView, StationInfoProps } from "../SearchForm/MainFormView";

@@ -1,4 +1,4 @@
-import { StationInfoProps } from "../SearchForm/MainFormView";
+import { StationInfoProps } from "../Components/SearchForm/MainFormView";
 
 let getStationAbbr = (
   searchedValue: FormDataEntryValue,
