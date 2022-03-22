@@ -14,20 +14,13 @@ export type TravelInfoTypes = {
 //   response: TravelInfoTypes;
 // }
 
-interface SubmittedStationInfoProps {
-  travelInfo: string[];
-}
-
 const submitStationInfo = async (
-  submissionInfo: SubmittedStationInfoProps,
+  submissionInfo: FormDataEntryValue[],
   stationInfo: StationInfoProps[]
 ) => {
-  const [arrival, departure] = submissionInfo.travelInfo;
+  const [arrival, departure] = submissionInfo;
   let arrivalAbbr = getStationAbbr(arrival, stationInfo);
   let departureAbbr = getStationAbbr(departure, stationInfo);
-
-  console.log("arrivalAbbr: ", arrivalAbbr);
-  console.log("departureAbbr: ", departureAbbr);
 
   /**
    * only receivng departure information for now but will receive event

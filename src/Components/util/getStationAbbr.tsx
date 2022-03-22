@@ -1,7 +1,7 @@
 import { StationInfoProps } from "../SearchForm/MainFormView";
 
 let getStationAbbr = (
-  searchedValue: string,
+  searchedValue: FormDataEntryValue,
   stationInfo: StationInfoProps[]
 ) => {
   if (stationInfo instanceof Array) {

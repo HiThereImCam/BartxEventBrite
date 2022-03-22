@@ -244,75 +244,38 @@
 //   };
 // }
 
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { AxiosResponse } from "axios";
 import submitStationInfo from "../util/submitStationInfo";
+
 import TravelResults from "../Travel/TravelResults";
+import Input from "./Input";
 
 export type StationInfoProps = {
   abbr: string;
   name: string;
 };
 
-interface TravelTypes {
-  arrival?: string;
-  departure?: string;
-  arrivalEmpty?: boolean;
-  departureEmpty?: boolean;
-}
-
-export interface MainFormViewProps {
-  stationInfo: StationInfoProps[];
-}
-
-export const MainFormView = (props: MainFormViewProps) => {
-  const { stationInfo } = props;
-  // const [
-  //   { arrival, departure, arrivalEmpty, departureEmpty },
-  //   setTravelState
-  // ] = useState<TravelTypes>({
-  //   arrival: "",
-  //   departure: "",
-  //   arrivalEmpty: true,
-  //   departureEmpty: true
-  // });
-  // const [
-  //   travelState,
-  //   setTravelState
-  // ] = useState<TravelTypes>({
-  //   arrival: "",
-  //   departure: "",
-  //   arrivalEmpty: true,
-  //   departureEmpty: true
-  // });
-
-  const [travelState, setTravelState] = useReducer(
-    (state: TravelTypes, newState: Partial<TravelTypes>) => ({
-      ...state,
-      ...newState
-    }),
-    {
-      arrival: "",
-      departure: "",
-      arrivalEmpty: true,
-      departureEmpty: true
-    }
-  );
-
-  // what if we need the abbr instead of the actual name?
-
+export const MainFormView = (props: { stationInfo: StationInfoProps[] }) => {
+  // const [stations, setStations] = useState<Array<StationInfoProps>>([]);
   const [submitted, setSubmitted] = useState(false);
   const [travelInfo, setTravelInfo] = useState<AxiosResponse | undefined>();
 
+  const { stationInfo } = props;
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { arrival, departure } = travelState;
-    if (arrival && departure) {
-      setSubmitted(true);
+    const formData = new FormData(event.currentTarget);
+
+    // {departure: val, destination: val}
+    const formEntries = Object.fromEntries(formData.entries());
+
+    const departure = formEntries["departure"];
+    const destination = formEntries["destination"];
+
+    if (destination && departure) {
       let travelResponse = await submitStationInfo(
-        {
-          travelInfo: [arrival, departure]
-        },
+        [departure, destination],
         stationInfo
       );
       if (travelResponse) {
@@ -322,42 +285,21 @@ export const MainFormView = (props: MainFormViewProps) => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    // check if value is true
-    // if value is true- get the abbr
-
-    setTravelState({ [name]: value });
-  };
-
-  const { arrival, departure, arrivalEmpty, departureEmpty } = travelState;
   return (
     <div>
       {submitted && travelInfo ? (
         <TravelResults travelInfo={travelInfo} />
       ) : (
         <form onSubmit={handleSubmit}>
-          <input
-            placeholder="Enter departing station..."
-            name="departure"
-            value={departure}
-            onChange={handleInputChange}
-            list={"stations"}
-            autoComplete="off"
-            className={`${
-              departureEmpty ? "form__Main-Input_Red" : "form__Main-Input"
-            }`}
+          <Input
+            name={"departure"}
+            stationInfo={stationInfo}
+            wasSubmitted={submitted}
           />
-          <input
-            placeholder="Enter arriving station..."
-            name="arrival"
-            value={arrival}
-            autoComplete="off"
-            onChange={handleInputChange}
-            className={`${
-              arrivalEmpty ? "form__Main-Input_Red" : "form__Main-Input"
-            }`}
+          <Input
+            name={"destination"}
+            stationInfo={stationInfo}
+            wasSubmitted={submitted}
           />
           <button type="submit">Submit</button>
         </form>
@@ -365,6 +307,36 @@ export const MainFormView = (props: MainFormViewProps) => {
     </div>
   );
 };
+
+// type reducerState = {
+//   loading: boolean;
+//   error: string;
+// };
+
+// interface TravelTypes {
+//   arrival?: string;
+//   departure?: string;
+//   arrivalEmpty?: boolean;
+//   departureEmpty?: boolean;
+// }
+
+/*
+
+    const { arrival, departure } = travelState;
+    if (arrival && departure) {
+      setSubmitted(true);
+      let travelResponse = await submitStationInfo(
+        {
+          travelInfo: [arrival, departure]
+        },
+        stations
+      );
+      if (travelResponse) {
+        setTravelInfo(travelResponse);
+        setSubmitted(true);
+      }
+    }
+*/
 
 /**
  * The problem:
@@ -502,3 +474,50 @@ export const MainFormView = (props: MainFormViewProps) => {
 // if (name === "departure" && departureEmpty) {
 //   setTravelState({ departureEmpty: false });
 // }
+
+// const [
+//   { arrival, departure, arrivalEmpty, departureEmpty },
+//   setTravelState
+// ] = useState<TravelTypes>({
+//   arrival: "",
+//   departure: "",
+//   arrivalEmpty: true,
+//   departureEmpty: true
+// });
+// const [
+//   travelState,
+//   setTravelState
+// ] = useState<TravelTypes>({
+//   arrival: "",
+//   departure: "",
+//   arrivalEmpty: true,
+//   departureEmpty: true
+// });
+
+// const [travelState, setTravelState] = useReducer(
+//   (state: TravelTypes, newState: Partial<TravelTypes>) => ({
+//     ...state,
+//     ...newState
+//   }),
+//   {
+//     arrival: "",
+//     departure: "",
+//     arrivalEmpty: true,
+//     departureEmpty: true
+//   }
+// );
+
+// const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//   const { name, value } = e.target;
+
+//   setTravelState({ [name]: value });
+// };
+
+// const { arrival, departure, arrivalEmpty, departureEmpty } = travelState;
+
+// const departureInputLength = departure.inputVal.length
+// const destinationInputLength = destination.inputVal.length
+
+/*
+  if destin
+*/

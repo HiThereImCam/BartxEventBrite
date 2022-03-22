@@ -2,16 +2,18 @@ import React, { useState, useEffect, useReducer } from "react";
 import { Routes, Route } from "react-router-dom";
 import ErrorComponent from "../Reusables/ErrorComponent";
 import getData from "../util/getData";
+
 import "./_App.scss";
 import { MainFormView, StationInfoProps } from "../SearchForm/MainFormView";
 // import stationInfoProps from "../SearchForm/MainFormView";
-
-const stationUrl = process.env.REACT_APP_STATIONS_URL;
 
 type reducerState = {
   loading: boolean;
   error: string;
 };
+
+const stationUrl = process.env.REACT_APP_STATIONS_URL;
+
 function App() {
   const [state, setState] = useReducer(
     (state: reducerState, newState: reducerState) => ({
@@ -48,6 +50,7 @@ function App() {
   }, []);
 
   let { loading, error } = state;
+
   return (
     <div className="App">
       {loading ? (
@@ -57,6 +60,7 @@ function App() {
       ) : (
         <Routes>
           <Route path="/" element={<MainFormView stationInfo={stations} />} />
+          <Route path="/results" />
         </Routes>
       )}
     </div>
