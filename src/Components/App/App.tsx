@@ -30,6 +30,8 @@ function App() {
    * mental note: we need to save off the bart data
    * for the predictive functionality
    *
+   * global state
+   * 
    * Need to learn how to cache it for later use
    *
    */

@@ -32,27 +32,3 @@ const Input = ({ name, stationInfo, wasSubmitted }: Props) => {
 };
 
 export default Input;
-
-// let departure = useInput("");
-// let destination = useInput("");
-
-/*
-className={`${
-          departureEmpty ? "form__Main-Input_Red" : "form__Main-Input"
-        }`}
-*/
-
-/*
-<input
-        placeholder="Enter arriving station..."
-        name="arrival"
-        value={destination.inputVal}
-        autoComplete="off"
-        onChange={e => destination.handleInputChange(e)}
-        onBlur={() => setTouched(true)}
-        className={`${
-          arrivalEmpty ? "form__Main-Input_Red" : "form__Main-Input"
-        }`}
-      />
-
-*/

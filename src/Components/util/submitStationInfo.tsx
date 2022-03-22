@@ -10,10 +10,6 @@ export type TravelInfoTypes = {
   fares: object;
 };
 
-// interface TravelResponseInterface {
-//   response: TravelInfoTypes;
-// }
-
 const submitStationInfo = async (
   submissionInfo: FormDataEntryValue[],
   stationInfo: StationInfoProps[]

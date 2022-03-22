@@ -308,36 +308,6 @@ export const MainFormView = (props: { stationInfo: StationInfoProps[] }) => {
   );
 };
 
-// type reducerState = {
-//   loading: boolean;
-//   error: string;
-// };
-
-// interface TravelTypes {
-//   arrival?: string;
-//   departure?: string;
-//   arrivalEmpty?: boolean;
-//   departureEmpty?: boolean;
-// }
-
-/*
-
-    const { arrival, departure } = travelState;
-    if (arrival && departure) {
-      setSubmitted(true);
-      let travelResponse = await submitStationInfo(
-        {
-          travelInfo: [arrival, departure]
-        },
-        stations
-      );
-      if (travelResponse) {
-        setTravelInfo(travelResponse);
-        setSubmitted(true);
-      }
-    }
-*/
-
 /**
  * The problem:
  *  I want to be able to display certain errors based on
