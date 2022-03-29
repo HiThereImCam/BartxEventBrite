@@ -244,11 +244,11 @@
 //   };
 // }
 
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState } from "react";
 import { AxiosResponse } from "axios";
 import submitStationInfo from "../../util/submitStationInfo";
 
-import TravelResults from "../Travel/TravelResults";
+import TravelResults from "../TravelResults/TravelResults";
 import Input from "./Input";
 
 export type StationInfoProps = {
@@ -286,7 +286,7 @@ export const MainFormView = (props: { stationInfo: StationInfoProps[] }) => {
   };
 
   return (
-    <div>
+    <div className="form-container">
       {submitted && travelInfo ? (
         <TravelResults travelInfo={travelInfo} />
       ) : (

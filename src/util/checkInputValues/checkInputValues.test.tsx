@@ -6,15 +6,6 @@
  *
  */
 
-// let mockReturnValues = [
-//     ['mill', false],
-//     ['millbrae', true],
-//     ['', false],
-//     ['fremont', true],
-//     ['23afi32', false]
-// ]
-
-import { StationInfoProps } from "../../Components/SearchForm/MainFormView";
 import checkInputValues from "./checkInputValues";
 
 type mockInputType = {
@@ -38,17 +29,6 @@ let mockInputValues: mockInputType[] = [
   { input: "hayward", expected: false },
   { input: "12th st. oakland city center", expected: false }
 ];
-/*
-
-
-*/
-
-// [("nor", false)],
-//   ["north", false],
-//   ["north berkeley", true],
-//   ["international", false],
-//   ["hayward", true],
-//   ["12th st. oakland city center", true];
 
 describe("stationInfo returns array of station names: ", () => {
   it("should return an array of station names", () => {
@@ -72,10 +52,3 @@ describe("stationInfo returns array of station names: ", () => {
     });
   });
 });
-
-// describe.each(mockInputValues)('.includes(%i, %i)', (input: string, expected: boolean) => {
-//     let inputResponse = checkInputValues(mockStationNames, input);
-//     test(`returns ${expected}`, () => {
-
-//     })
-// });

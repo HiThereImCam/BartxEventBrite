@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { StationInfoProps } from "../SearchForm/MainFormView";
 import checkInputValues from "../../util/checkInputValues/checkInputValues";
 

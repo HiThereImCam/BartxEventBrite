@@ -5,6 +5,8 @@ import getData from "../../util/getData";
 
 import "./_App.scss";
 import { MainFormView, StationInfoProps } from "../SearchForm/MainFormView";
+
+import Response from "../../testResponse";
 // import stationInfoProps from "../SearchForm/MainFormView";
 
 type reducerState = {
@@ -40,11 +42,16 @@ function App() {
     let stationData: StationInfoProps[] = await getData(stationUrl);
 
     if (!Array.isArray(stationData)) {
-      setState({ loading: false, error: stationData });
-    } else {
-      setStations(stationData);
+      setStations(Response);
       setState({ loading: false, error: "" });
     }
+
+    // if (!Array.isArray(stationData)) {
+    //   setState({ loading: false, error: stationData });
+    // } else {
+    //   setStations(stationData);
+    //   setState({ loading: false, error: "" });
+    // }
   };
 
   useEffect(() => {
@@ -54,19 +61,24 @@ function App() {
   let { loading, error } = state;
 
   return (
-    <div className="App">
+    <div className="app">
       {loading ? (
         <div>Loading...</div>
       ) : error ? (
         <ErrorComponent error={error} />
       ) : (
-        <Routes>
-          <Route path="/" element={<MainFormView stationInfo={stations} />} />
-          <Route path="/results" />
-        </Routes>
+        <MainFormView stationInfo={stations} />
       )}
     </div>
   );
 }
 
 export default App;
+
+/* 
+
+<Routes>
+          <Route path="/" element={} />
+          <Route path="/results" />
+        </Routes>
+*/

@@ -6,86 +6,93 @@ $default-font-color: #474747;
 // airbnb style box shadow:
 //     box-shadow: 0 16px 40px rgba(0,0,0,0.12);
 
-.wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  position: relative;
-  background-color: white;
-  height: 61rem;
-  width: 44.1rem;
-  top: 11.5rem;
-  left: 10rem;
-  border-radius: 3px;
-  box-shadow: 0.2rem 0.2rem 4rem 0px rgba(0, 0, 0, 0.75);
-}
-
-.form {
+.form-container {
   width: 100%;
-
-  &__Header {
-    font-size: $header-font-size;
-    color: $default-font-color;
-    text-align: center;
-    margin-top: 2rem;
-  }
-
-  &__Main {
-    border: 0.5rem;
-    margin: 1rem;
-
-    & h3 {
-      font-weight: $default-font-weight;
-      font-size: $default-font-size;
-      color: $default-font-color;
-      margin: 1rem 0 0.1rem 0;
-    }
-
-    &-Input {
-      display: block;
-      font-size: $default-font-size;
-      border: 1px solid rgb(222, 222, 222);
-      border-radius: 3px;
-      padding: 1rem;
-      margin: 1.2rem 0;
-      width: 75%;
-    }
-
-    &-Input_Red {
-      display: block;
-      font-size: $default-font-size;
-      border-radius: 3px;
-      border: 1px solid red;
-      padding: 1rem;
-      margin: 1.2rem 0;
-      width: 75%;
-      outline: none;
-    }
-  }
+  border: 2px solid blue;
+  display: flex;
+  margin: 5% 0;
 }
 
-.dropDown {
-  &__wrapper {
-    position: relative;
-    display: inline-block;
-  }
+// .wrapper {
+//   display: flex;
+//   flex-wrap: wrap;
+//   position: relative;
+//   background-color: white;
+//   height: 61rem;
+//   width: 44.1rem;
+//   top: 11.5rem;
+//   left: 10rem;
+//   border-radius: 3px;
+//   box-shadow: 0.2rem 0.2rem 4rem 0px rgba(0, 0, 0, 0.75);
+// }
 
-  &__list {
-    position: absolute;
-    background-color: #f6f6f6;
-    min-width: 230px;
-    max-height: 200px;
-    border: 1px solid #ddd;
-    z-index: 1;
-    overflow: hidden;
+// .form {
+//   width: 100%;
 
-    &-Item {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-  }
-}
+//   &__Header {
+//     font-size: $header-font-size;
+//     color: $default-font-color;
+//     text-align: center;
+//     margin-top: 2rem;
+//   }
+
+//   &__Main {
+//     border: 0.5rem;
+//     margin: 1rem;
+
+//     & h3 {
+//       font-weight: $default-font-weight;
+//       font-size: $default-font-size;
+//       color: $default-font-color;
+//       margin: 1rem 0 0.1rem 0;
+//     }
+
+//     &-Input {
+//       display: block;
+//       font-size: $default-font-size;
+//       border: 1px solid rgb(222, 222, 222);
+//       border-radius: 3px;
+//       padding: 1rem;
+//       margin: 1.2rem 0;
+//       width: 75%;
+//     }
+
+//     &-Input_Red {
+//       display: block;
+//       font-size: $default-font-size;
+//       border-radius: 3px;
+//       border: 1px solid red;
+//       padding: 1rem;
+//       margin: 1.2rem 0;
+//       width: 75%;
+//       outline: none;
+//     }
+//   }
+// }
+
+// .dropDown {
+//   &__wrapper {
+//     position: relative;
+//     display: inline-block;
+//   }
+
+//   &__list {
+//     position: absolute;
+//     background-color: #f6f6f6;
+//     min-width: 230px;
+//     max-height: 200px;
+//     border: 1px solid #ddd;
+//     z-index: 1;
+//     overflow: hidden;
+
+//     &-Item {
+//       color: black;
+//       padding: 12px 16px;
+//       text-decoration: none;
+//       display: block;
+//     }
+//   }
+// }
 
 // .form__Header {
 //   font-size: 1.5rem;
