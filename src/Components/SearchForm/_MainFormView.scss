@@ -6,11 +6,70 @@ $default-font-color: #474747;
 // airbnb style box shadow:
 //     box-shadow: 0 16px 40px rgba(0,0,0,0.12);
 
+.section-child {
+  max-width: 1136px;
+  margin: 0 auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
 .form-container {
   width: 100%;
-  border: 2px solid blue;
+
   display: flex;
-  margin: 5% 0;
+  margin: 0% 0;
+  height: 85vh;
+  align-items: center;
+}
+
+.form {
+  border: 1px solid black;
+  box-shadow: 0 16px 40px rgb(0 0 0 / 12%);
+  height: 425px;
+  display: flex;
+  flex-direction: column;
+  width: 375px;
+
+  &__Header {
+    text-align: center;
+    margin-top: 3.5rem;
+
+    & h3 {
+      font-size: 2.23rem;
+      font-weight: $default-font-weight;
+    }
+  }
+
+  &__Wrapper {
+    height: 56%;
+    width: 100%;
+    margin-top: 3.5rem;
+
+    & h3 {
+      font-size: 1.5rem;
+      font-weight: $default-font-weight;
+      margin-left: 2.7rem;
+    }
+  }
+
+  .button-container {
+    text-align: right;
+    margin-right: 1.5rem;
+
+    &__Button {
+      margin-right: 1rem;
+      padding: 10px 23px;
+      border-radius: 8px;
+      background-color: #0275d8;
+      color: white;
+      font-weight: 600;
+      border: none;
+      font-size: 1.62rem;
+    }
+  }
 }
 
 // .wrapper {

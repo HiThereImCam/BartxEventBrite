@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { StationInfoProps } from "../SearchForm/MainFormView";
 import checkInputValues from "../../util/checkInputValues/checkInputValues";
 
@@ -16,7 +16,7 @@ const Input = ({ name, stationInfo, wasSubmitted }: Props) => {
   const displayErrorMessage = (wasSubmitted || touched) && errorMessage;
 
   return (
-    <Fragment>
+    <div className="input-container">
       <input
         placeholder="Enter station... "
         name={name}
@@ -25,9 +25,10 @@ const Input = ({ name, stationInfo, wasSubmitted }: Props) => {
         onBlur={() => setTouched(true)}
         list={"stations"}
         autoComplete="off"
+        className="input"
       />
       {displayErrorMessage ? { errorMessage } : null}
-    </Fragment>
+    </div>
   );
 };
 

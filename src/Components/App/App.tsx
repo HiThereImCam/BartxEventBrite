@@ -67,7 +67,9 @@ function App() {
       ) : error ? (
         <ErrorComponent error={error} />
       ) : (
-        <MainFormView stationInfo={stations} />
+        <div className="section">
+          <MainFormView stationInfo={stations} />
+        </div>
       )}
     </div>
   );

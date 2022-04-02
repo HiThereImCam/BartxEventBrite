@@ -249,7 +249,7 @@ import { AxiosResponse } from "axios";
 import submitStationInfo from "../../util/submitStationInfo";
 
 import TravelResults from "../TravelResults/TravelResults";
-import Input from "./Input";
+import Input from "../Input/Input";
 
 export type StationInfoProps = {
   abbr: string;
@@ -286,24 +286,39 @@ export const MainFormView = (props: { stationInfo: StationInfoProps[] }) => {
   };
 
   return (
-    <div className="form-container">
-      {submitted && travelInfo ? (
-        <TravelResults travelInfo={travelInfo} />
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <Input
-            name={"departure"}
-            stationInfo={stationInfo}
-            wasSubmitted={submitted}
-          />
-          <Input
-            name={"destination"}
-            stationInfo={stationInfo}
-            wasSubmitted={submitted}
-          />
-          <button type="submit">Submit</button>
-        </form>
-      )}
+    <div className="section-child">
+      <div className="container">
+        <div className="form-container">
+          {submitted && travelInfo ? (
+            <TravelResults travelInfo={travelInfo} />
+          ) : (
+            <form onSubmit={handleSubmit} className="form">
+              <div className="form__Header">
+                <h3>Where are we going today?</h3>
+              </div>
+              <div className="form__Wrapper">
+                <h3>From</h3>
+                <Input
+                  name={"departure"}
+                  stationInfo={stationInfo}
+                  wasSubmitted={submitted}
+                />
+                <h3>To</h3>
+                <Input
+                  name={"destination"}
+                  stationInfo={stationInfo}
+                  wasSubmitted={submitted}
+                />
+              </div>
+              <div className="button-container">
+                <button type="submit" className="button-container__Button">
+                  Find trains
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
